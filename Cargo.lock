@@ -655,21 +655,21 @@ dependencies = [
 
 [[package]]
 name = "nu-engine"
-version = "0.87.1"
+version = "0.88.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3d0170926591c7a2917ba44216ee495bf08b869451ae686114ce7447a8a5500e"
+checksum = "efafd9c97f3325a5d617590bc29f11d4b8fec27b0942098d88b89c845ebc026b"
 dependencies = [
  "nu-glob",
- "nu-path",
- "nu-protocol",
- "nu-utils",
+ "nu-path 0.88.0",
+ "nu-protocol 0.88.0",
+ "nu-utils 0.88.0",
 ]
 
 [[package]]
 name = "nu-glob"
-version = "0.87.1"
+version = "0.88.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "09ad25ca0d9897bf0f0ee8b0b79d9581891d8708f4b6e545897b47e48da05b7f"
+checksum = "5b5040ac6629fe514790a753340745715d3adb7fcb44a03a60b92e9cae85c62b"
 
 [[package]]
 name = "nu-path"
@@ -683,14 +683,25 @@ dependencies = [
 ]
 
 [[package]]
-name = "nu-plugin"
-version = "0.87.1"
+name = "nu-path"
+version = "0.88.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a52f1e1328d20afb09b6ae82ecf323f06598d4386f6be962bd25f128fbfb0d4e"
+checksum = "0ee8dc36e48be914a4335b76c95f67588b8717f4637cb646ed482d6dca3df2ad"
+dependencies = [
+ "dirs-next",
+ "omnipath",
+ "pwd",
+]
+
+[[package]]
+name = "nu-plugin"
+version = "0.88.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f6f8693a7c99547534a2311f1acc7d0688d646f1a2c601e3e533802e1fe701ab"
 dependencies = [
  "bincode",
  "nu-engine",
- "nu-protocol",
+ "nu-protocol 0.88.0",
  "rmp-serde",
  "serde",
  "serde_json",
@@ -709,9 +720,31 @@ dependencies = [
  "indexmap",
  "lru",
  "miette",
- "nu-path",
- "nu-system",
- "nu-utils",
+ "nu-path 0.87.1",
+ "nu-system 0.87.1",
+ "nu-utils 0.87.1",
+ "num-format",
+ "serde",
+ "thiserror",
+ "typetag",
+]
+
+[[package]]
+name = "nu-protocol"
+version = "0.88.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97760fc1ee8a53170624d3f6bdb14b960df25b988a7e3b86356ea76003b7186f"
+dependencies = [
+ "byte-unit",
+ "chrono",
+ "chrono-humanize",
+ "fancy-regex",
+ "indexmap",
+ "lru",
+ "miette",
+ "nu-path 0.88.0",
+ "nu-system 0.88.0",
+ "nu-utils 0.88.0",
  "num-format",
  "serde",
  "serde_json",
@@ -733,7 +766,26 @@ dependencies = [
  "nix",
  "ntapi",
  "once_cell",
- "procfs",
+ "procfs 0.15.1",
+ "sysinfo",
+ "winapi",
+]
+
+[[package]]
+name = "nu-system"
+version = "0.88.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "de584d90ef319ab18253a8f2d31dceac6160babdecacb2284edf972f924ae55c"
+dependencies = [
+ "chrono",
+ "libc",
+ "libproc",
+ "log",
+ "mach2",
+ "nix",
+ "ntapi",
+ "once_cell",
+ "procfs 0.16.0",
  "sysinfo",
  "winapi",
 ]
@@ -754,12 +806,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "nu-utils"
+version = "0.88.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8690ab0fe2308d1e56cf99931d6be04629c72f615f8e9c8141051f676965a056"
+dependencies = [
+ "crossterm_winapi",
+ "log",
+ "lscolors",
+ "num-format",
+ "strip-ansi-escapes",
+ "sys-locale",
+ "unicase",
+]
+
+[[package]]
 name = "nu_plugin_from_bencode"
-version = "0.8.0"
+version = "0.8.1"
 dependencies = [
  "bt_bencode",
  "nu-plugin",
- "nu-protocol",
+ "nu-protocol 0.87.1",
 ]
 
 [[package]]
@@ -833,6 +900,32 @@ dependencies = [
  "hex",
  "lazy_static",
  "rustix 0.36.17",
+]
+
+[[package]]
+name = "procfs"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "731e0d9356b0c25f16f33b5be79b1c57b562f141ebfcdb0ad8ac2c13a24293b4"
+dependencies = [
+ "bitflags 2.4.1",
+ "chrono",
+ "flate2",
+ "hex",
+ "lazy_static",
+ "procfs-core",
+ "rustix 0.38.24",
+]
+
+[[package]]
+name = "procfs-core"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2d3554923a69f4ce04c4a754260c338f505ce22642d3830e049a399fc2059a29"
+dependencies = [
+ "bitflags 2.4.1",
+ "chrono",
+ "hex",
 ]
 
 [[package]]
