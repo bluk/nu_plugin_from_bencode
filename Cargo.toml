@@ -22,5 +22,5 @@ rust-version = "1.70.0"
 
 [dependencies]
 nu-plugin = "0.87.1"
-nu-protocol = "0.87.1"
+nu-protocol = "0.88.1"
 bt_bencode = { version = "0.7", default-features = false, features = ["alloc"] }
