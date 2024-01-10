@@ -326,6 +326,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "fancy-regex"
+version = "0.12.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7493d4c459da9f84325ad297371a6b2b8a162800873a22e3b6b6512e61d18c05"
+dependencies = [
+ "bit-set",
+ "regex",
+]
+
+[[package]]
 name = "flate2"
 version = "1.0.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -526,6 +536,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "lscolors"
+version = "0.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab0b209ec3976527806024406fe765474b9a1750a0ed4b8f0372364741f50e7b"
+dependencies = [
+ "nu-ansi-term",
+]
+
+[[package]]
 name = "mach2"
 version = "0.4.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -631,9 +650,9 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f31549205c091d89cb1bad9e97a5944b998f9417a718c0ad5d1ca373abe27c8b"
 dependencies = [
  "nu-glob",
- "nu-path",
- "nu-protocol",
- "nu-utils",
+ "nu-path 0.88.1",
+ "nu-protocol 0.88.1",
+ "nu-utils 0.88.1",
 ]
 
 [[package]]
@@ -654,6 +673,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "nu-path"
+version = "0.89.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "02ae20c09b7d8feb3bc98f754509fefd9dde1bc1887ef012bbea8323a24e30c5"
+dependencies = [
+ "dirs-next",
+ "omnipath",
+ "pwd",
+]
+
+[[package]]
 name = "nu-plugin"
 version = "0.88.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -661,7 +691,7 @@ checksum = "b27df1024c58a62d2108ed3a430276a22495a357458b40769d9f45e3a7a88250"
 dependencies = [
  "bincode",
  "nu-engine",
- "nu-protocol",
+ "nu-protocol 0.88.1",
  "rmp-serde",
  "serde",
  "serde_json",
@@ -676,16 +706,38 @@ dependencies = [
  "byte-unit",
  "chrono",
  "chrono-humanize",
- "fancy-regex",
+ "fancy-regex 0.11.0",
  "indexmap",
  "lru",
  "miette",
- "nu-path",
- "nu-system",
- "nu-utils",
+ "nu-path 0.88.1",
+ "nu-system 0.88.1",
+ "nu-utils 0.88.1",
  "num-format",
  "serde",
  "serde_json",
+ "thiserror",
+ "typetag",
+]
+
+[[package]]
+name = "nu-protocol"
+version = "0.89.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "538279bdcea8408ded8cd1a89cef81932500255a619aac2baafc5a7a14922734"
+dependencies = [
+ "byte-unit",
+ "chrono",
+ "chrono-humanize",
+ "fancy-regex 0.12.0",
+ "indexmap",
+ "lru",
+ "miette",
+ "nu-path 0.89.0",
+ "nu-system 0.89.0",
+ "nu-utils 0.89.0",
+ "num-format",
+ "serde",
  "thiserror",
  "typetag",
 ]
@@ -705,8 +757,27 @@ dependencies = [
  "ntapi",
  "once_cell",
  "procfs",
- "sysinfo",
+ "sysinfo 0.29.11",
  "winapi",
+]
+
+[[package]]
+name = "nu-system"
+version = "0.89.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c5c1fdc10c88f281b2dadd547487d68e1cedde9265b8a99aa382040e83131f1"
+dependencies = [
+ "chrono",
+ "libc",
+ "libproc",
+ "log",
+ "mach2",
+ "nix",
+ "ntapi",
+ "once_cell",
+ "procfs",
+ "sysinfo 0.30.5",
+ "windows",
 ]
 
 [[package]]
@@ -717,7 +788,22 @@ checksum = "339eed81dd7f6c59bcd14f9d9076f223c0aa0632b42e1efa60de1376f4fa04bd"
 dependencies = [
  "crossterm_winapi",
  "log",
- "lscolors",
+ "lscolors 0.15.0",
+ "num-format",
+ "strip-ansi-escapes",
+ "sys-locale",
+ "unicase",
+]
+
+[[package]]
+name = "nu-utils"
+version = "0.89.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "419cab03e6dd315e2af237006c51707e12bd646805ee83b83869a76c658895e9"
+dependencies = [
+ "crossterm_winapi",
+ "log",
+ "lscolors 0.16.0",
  "num-format",
  "strip-ansi-escapes",
  "sys-locale",
@@ -730,7 +816,7 @@ version = "0.9.0"
 dependencies = [
  "bt_bencode",
  "nu-plugin",
- "nu-protocol",
+ "nu-protocol 0.89.0",
 ]
 
 [[package]]
@@ -1074,6 +1160,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "sysinfo"
+version = "0.30.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1fb4f3438c8f6389c864e61221cbc97e9bca98b4daf39a5beb7bea660f528bb2"
+dependencies = [
+ "cfg-if",
+ "core-foundation-sys",
+ "libc",
+ "ntapi",
+ "once_cell",
+ "rayon",
+ "windows",
+]
+
+[[package]]
 name = "terminal_size"
 version = "0.1.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1284,6 +1385,16 @@ name = "winapi-x86_64-pc-windows-gnu"
 version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
+
+[[package]]
+name = "windows"
+version = "0.52.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e48a53791691ab099e5e2ad123536d0fff50652600abaf43bbf952894110d0be"
+dependencies = [
+ "windows-core",
+ "windows-targets 0.52.0",
+]
 
 [[package]]
 name = "windows-core"
