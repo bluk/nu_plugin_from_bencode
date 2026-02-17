@@ -37,7 +37,7 @@ fn convert_bencode_to_value(value: BVal, internal_span: Span) -> Result<Value, S
         BVal::Int(num) => match num {
             bt_bencode::value::Number::Signed(signed_num) => Value::int(signed_num, internal_span),
             bt_bencode::value::Number::Unsigned(unsigned_num) => i64::try_from(unsigned_num)
-                .map(|val| Value::Int { val, internal_span })
+                .map(|val| Value::int(val, internal_span))
                 .map_err(|_| {
                     ShellError::UnsupportedInput {
                         msg: "expected a compatible number".into(),
@@ -146,10 +146,7 @@ mod tests {
 
         let internal_span = Span::new(0, bencode_bytes.len());
         let nu_value = from_bytes_to_value(&bencode_bytes, internal_span).unwrap();
-        let expected = Value::String {
-            val: "hello world".to_string(),
-            internal_span,
-        };
+        let expected = Value::string("hello world", internal_span);
         assert_eq!(nu_value, expected);
 
         Ok(())
