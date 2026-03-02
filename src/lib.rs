@@ -32,6 +32,7 @@ impl Plugin for FromBencodePlugin {
     }
 }
 
+#[expect(clippy::result_large_err)]
 fn convert_bencode_to_value(value: BVal, internal_span: Span) -> Result<Value, ShellError> {
     Ok(match value {
         BVal::Int(num) => match num {
@@ -84,6 +85,7 @@ fn convert_bencode_to_value(value: BVal, internal_span: Span) -> Result<Value, S
 /// # Errors
 ///
 /// Returns an error if the input is not valid bencode data.
+#[expect(clippy::result_large_err)]
 pub fn from_bytes_to_value(input: &[u8], head: Span) -> Result<Value, ShellError> {
     let value = bt_bencode::from_slice(input).map_err(|_e| ShellError::CantConvert {
         to_type: "bencode data".into(),
@@ -94,6 +96,7 @@ pub fn from_bytes_to_value(input: &[u8], head: Span) -> Result<Value, ShellError
     convert_bencode_to_value(value, head)
 }
 
+#[expect(clippy::result_large_err)]
 fn convert_value_to_bencode(nu_val: &Value) -> Result<BVal, ShellError> {
     // Handle just enough to round trip: from bencode |to bencode
     match nu_val {
@@ -101,7 +104,7 @@ fn convert_value_to_bencode(nu_val: &Value) -> Result<BVal, ShellError> {
         Value::String { val, .. } => Ok(BVal::ByteStr(val.clone().into())),
         Value::Binary { val, .. } => Ok(BVal::ByteStr(val.clone().into())),
         Value::List { vals, .. } => Ok(BVal::List(
-            vals.into_iter()
+            vals.iter()
                 .map(convert_value_to_bencode)
                 .collect::<Result<_, _>>()?,
         )),
@@ -123,16 +126,15 @@ fn convert_value_to_bencode(nu_val: &Value) -> Result<BVal, ShellError> {
 }
 
 /// Nu value, to bt_bencode value, to vec
+#[expect(clippy::result_large_err)]
 pub fn from_value_to_bytes(nu_val: &Value, span: Span) -> Result<Vec<u8>, ShellError> {
     let bt_val = convert_value_to_bencode(nu_val)?;
-    Ok(
-        bt_bencode::to_vec(&bt_val).map_err(|_e| ShellError::CantConvert {
-            to_type: "binary".into(),
-            from_type: "bencode data".into(),
-            span,
-            help: None,
-        })?,
-    )
+    bt_bencode::to_vec(&bt_val).map_err(|_e| ShellError::CantConvert {
+        to_type: "binary".into(),
+        from_type: "bencode data".into(),
+        span,
+        help: None,
+    })
 }
 
 #[cfg(test)]
